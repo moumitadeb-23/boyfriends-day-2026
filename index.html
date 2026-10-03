@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#120a18">
+  <meta name="description" content="A handcrafted Happy Boyfriend's Day gift for Mr Goswami from Bhutum.">
+  <title>Happy Boyfriend's Day, Mr Goswami ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="secretGate" class="secret-gate" hidden>
+    <div class="secret-card glass">
+      <span class="eyebrow">A tiny secret door</span>
+      <h2>Only we know the key.</h2>
+      <p>Enter our special date to open your surprise.</p>
+      <form id="secretForm">
+        <input id="secretInput" type="password" inputmode="numeric" autocomplete="off" placeholder="DDMMYYYY" aria-label="Secret password">
+        <button class="btn btn-primary" type="submit">Unlock ❤️</button>
+      </form>
+      <p id="secretError" class="form-error" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div id="intro" class="intro">
+    <div class="intro-glow"></div>
+    <div class="envelope-wrap" id="envelopeButton" role="button" tabindex="0" aria-label="Open your surprise">
+      <div class="envelope-heart">♥</div>
+      <div class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-paper">For<br><strong>Mr Goswami</strong></div>
+      </div>
+    </div>
+    <p class="eyebrow">A little surprise from Bhutum</p>
+    <h1>Tap to open<br><em>your surprise</em></h1>
+    <p class="intro-hint">Music begins when you open it. 🎧</p>
+    <button id="openButton" class="btn btn-primary pulse" type="button">Open our little world <span>♥</span></button>
+  </div>
+
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div id="heartLayer" aria-hidden="true"></div>
+  <div class="cursor-heart" id="cursorHeart" aria-hidden="true">♥</div>
+
+  <header class="topbar" id="topbar">
+    <a href="#home" class="brand" aria-label="Back to top"><span>♥</span> Butum <i>&amp;</i> Mr. Goswami</a>
+    <nav aria-label="Primary navigation">
+      <a href="#story">Our Story</a>
+      <a href="#gallery">Memories</a>
+      <a href="#reasons">Why You</a>
+      <a href="#letter">Letter</a>
+      <a href="#fun">Us</a>
+    </nav>
+    <button id="settingsButton" class="icon-btn editor-only" type="button" aria-label="Open customization settings">⚙</button>
+  </header>
+
+  <main id="app" hidden>
+    <section id="home" class="hero section">
+      <div class="hero-orbit orbit-a"></div>
+      <div class="hero-orbit orbit-b"></div>
+      <div class="hero-copy">
+        <span class="eyebrow reveal">For the boy who became my favourite person</span>
+        <h1 class="hero-title reveal"><span>Happy Boyfriend's Day,</span><strong id="heroName">Mr Goswami</strong></h1>
+        <p class="hero-subtitle reveal" id="heroTagline">A little corner of the internet that belongs only to us.</p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary" href="#story">Take me through our story <span>↓</span></a>
+          <button class="btn btn-ghost" id="surpriseTop" type="button">Surprise me ✨</button>
+        </div>
+        <div class="counter glass reveal" aria-label="Time together">
+          <div><span id="days">0</span><small>days</small></div>
+          <i>·</i>
+          <div><span id="hours">0</span><small>hours</small></div>
+          <i>·</i>
+          <div><span id="minutes">0</span><small>minutes</small></div>
+          <i>·</i>
+          <div><span id="seconds">0</span><small>seconds</small></div>
+          <p>of choosing each other</p>
+        </div>
+      </div>
+      <div class="hero-photo reveal">
+        <div class="photo-frame">
+          <img src="assets/images/memory-08.png" alt="A favourite photo of Bhutum and Mr Goswami together">
+          <div class="photo-note">You + me<br><strong>always.</strong></div>
+        </div>
+      </div>
+      <div class="scroll-cue"><span></span> scroll into our story</div>
+    </section>
+
+    <section class="marquee-strip" aria-label="Things he loves">
+      <div id="loveMarquee"></div>
+    </section>
+
+    <section id="story" class="section story-section">
+      <div class="section-heading reveal">
+        <span class="eyebrow">Chapter one</span>
+        <h2>How we became <em>us</em></h2>
+        <p>Not one grand moment. A thousand little ones.</p>
+      </div>
+      <div id="timeline" class="timeline"></div>
+    </section>
+
+    <section id="gallery" class="section gallery-section">
+      <div class="section-heading reveal">
+        <span class="eyebrow">The evidence</span>
+        <h2>Our little <em>museum</em></h2>
+        <p>Proof that ordinary days look different when I'm with you.</p>
+      </div>
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
+
+    <section id="reasons" class="section reasons-section">
+      <div class="section-heading reveal">
+        <span class="eyebrow">A confession</span>
+        <h2>Reasons I love <em>you</em></h2>
+        <p>Tap a card. I have a lot to say. ❤️</p>
+      </div>
+      <div id="reasonGrid" class="reason-grid"></div>
+    </section>
+
+    <section id="letter" class="section letter-section">
+      <div class="section-heading reveal">
+        <span class="eyebrow">From my heart</span>
+        <h2>A letter for <em>Mr Goswami</em></h2>
+      </div>
+      <article class="letter-paper reveal">
+        <div class="letter-top"><span>14.01.2025</span><span>♥</span><span>∞</span></div>
+        <div id="loveLetter" class="letter-text"></div>
+        <div class="letter-sign">Forever your<br><strong>Bhutum</strong> ♥</div>
+      </article>
+    </section>
+
+    <section id="fun" class="section fun-section">
+      <div class="section-heading reveal">
+        <span class="eyebrow">Because we're us</span>
+        <h2>Let's play a little <em>game</em></h2>
+        <p>There is no prize. Except bragging rights. 😌</p>
+      </div>
+
+      <div class="quiz glass reveal">
+        <div class="quiz-head">
+          <div><span class="eyebrow">01 / 02</span><h3>How well do you know us?</h3></div>
+          <span id="quizProgress">1 / 5</span>
+        </div>
+        <div id="quizBody"></div>
+      </div>
+
+      <div class="envelopes reveal">
+        <div class="mini-heading"><span class="eyebrow">02 / 02</span><h3>Open when...</h3></div>
+        <div id="envelopeGrid" class="envelope-grid"></div>
+      </div>
+    </section>
+
+    <section class="section coupons-section">
+      <div class="section-heading reveal">
+        <span class="eyebrow">Redeemable affection</span>
+        <h2>Your little <em>coupons</em></h2>
+        <p>Tap a coupon to redeem it. Terms and conditions: I love you. That's it.</p>
+      </div>
+      <div id="couponGrid" class="coupon-grid"></div>
+    </section>
+
+    <section class="final-section" id="finalSurprise">
+      <div class="final-glow"></div>
+      <span class="eyebrow">One last thing</span>
+      <h2 id="finalTitle">Mr Goswami, I still choose you.</h2>
+      <p id="finalText">Today, tomorrow, and in all the ordinary little moments in between.</p>
+      <button class="btn btn-primary btn-large" id="surpriseButton" type="button">Press for a surprise ♥</button>
+      <div id="surpriseMessage" class="surprise-message" hidden>
+        <span>✨</span>
+        <p>You are my favourite person, my safest place, and my forever kind of chaos.</p>
+        <strong>Love, Bhutum ❤️</strong>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-heart">♥</div>
+    <p>Made with love by <strong>Bhutum</strong> for <strong>Mr Goswami</strong></p>
+    <p class="footer-small">Since 14 January 2025 · Still choosing us.</p>
+    <button id="easterEgg" class="easter-egg" type="button" aria-label="Tiny secret">✦</button>
+  </footer>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close photo">×</button>
+    <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+    <figure>
+      <img id="lightboxImage" src="" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox-nav next" id="lightboxNext" aria-label="Next photo">›</button>
+  </div>
+
+  <aside id="settingsDrawer" class="settings-drawer" aria-label="Customization settings" aria-hidden="true">
+    <div class="drawer-head">
+      <div><span class="eyebrow">Editor mode</span><h2>Make it yours</h2></div>
+      <button id="closeSettings" class="icon-btn" type="button" aria-label="Close settings">×</button>
+    </div>
+    <div class="settings-content">
+      <label>His name<input id="editHim" type="text"></label>
+      <label>Your name<input id="editMe" type="text"></label>
+      <label>Relationship start<input id="editDate" type="datetime-local"></label>
+      <label>Accent colour<input id="editAccent" type="color"></label>
+      <label>Theme
+        <select id="editTheme">
+          <option value="cinematic">Cinematic Gold</option>
+          <option value="rose">Midnight Rose</option>
+          <option value="lavender">Moonlit Lavender</option>
+          <option value="emerald">Velvet Emerald</option>
+        </select>
+      </label>
+      <label>Font style
+        <select id="editFont">
+          <option value="elegant">Elegant Serif</option>
+          <option value="modern">Modern</option>
+          <option value="romantic">Romantic Script</option>
+        </select>
+      </label>
+      <div class="setting-toggles">
+        <label class="switch-row"><span>Particles</span><input id="toggleParticles" type="checkbox"><i></i></label>
+        <label class="switch-row"><span>Background effects</span><input id="toggleEffects" type="checkbox"><i></i></label>
+        <label class="switch-row"><span>Animations</span><input id="toggleAnimations" type="checkbox"><i></i></label>
+      </div>
+      <label>Live love letter<textarea id="editLetter" rows="8"></textarea></label>
+      <div class="settings-actions">
+        <button class="btn btn-primary" id="saveSettings" type="button">Save changes</button>
+        <button class="btn btn-ghost" id="resetSettings" type="button">Reset defaults</button>
+        <button class="btn btn-ghost" id="exportSettings" type="button">Export JSON</button>
+        <label class="btn btn-ghost file-button">Import JSON<input id="importSettings" type="file" accept=".json,application/json"></label>
+      </div>
+      <hr>
+      <h3>Photo replacement</h3>
+      <p class="settings-note">Choose a photo to replace one of the eight gallery images for this browser. It is stored locally in IndexedDB and won't change the public files.</p>
+      <label>Photo slot
+        <select id="photoSlot"></select>
+      </label>
+      <label class="btn btn-ghost file-button">Upload photo<input id="photoUpload" type="file" accept="image/*"></label>
+      <hr>
+      <h3>Music library</h3>
+      <p class="settings-note">Upload MP3/M4A/WAV files or add a YouTube/Spotify link. Browser-added music is device-local.</p>
+      <label class="btn btn-ghost file-button">Add audio<input id="audioUpload" type="file" accept="audio/*" multiple></label>
+      <div class="music-link-row">
+        <input id="musicLink" type="url" placeholder="YouTube or Spotify URL">
+        <button id="addMusicLink" class="btn btn-primary" type="button">Add</button>
+      </div>
+      <div id="musicLibrary" class="music-library"></div>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="music-player" id="musicPlayer" aria-label="Love soundtrack player">
+    <div class="vinyl-wrap"><div class="vinyl" id="vinyl"><img id="playerCover" src="assets/images/memory-01.jpg" alt="Album art"></div></div>
+    <div class="track-meta"><strong id="playerTitle">Your Love Soundtrack</strong><span id="playerArtist">Add songs from the music settings</span></div>
+    <button class="music-close" id="musicClose" type="button" aria-label="Hide music player">×</button>
+    <div class="music-controls" aria-label="Music controls">
+      <button class="music-btn" id="prevSong" aria-label="Previous song">⏮</button>
+      <button class="music-btn play" id="playSong" aria-label="Play">▶</button>
+      <button class="music-btn" id="nextSong" aria-label="Next song">⏭</button>
+      <button class="music-btn small" id="shuffleSong" aria-label="Shuffle">🔀</button>
+      <button class="music-btn small" id="repeatSong" aria-label="Repeat">↻</button>
+      <button class="music-btn small" id="muteSong" aria-label="Mute">🔊</button>
+      <input id="volumeBar" class="volume" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volume">
+      <button class="music-btn small editor-only" id="playerSettings" aria-label="Open music settings">⚙</button>
+    </div>
+    <div class="seek-wrap"><input id="seekBar" type="range" min="0" max="100" value="0" aria-label="Song progress"></div>
+  </div>
+  <button class="music-reopen" id="musicReopen" type="button" aria-label="Show music player">♫</button>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  <script src="config.js?v=20261003"></script>
+  <script src="script.js?v=20261003"></script>
+</body>
+</html>
